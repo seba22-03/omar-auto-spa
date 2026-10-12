@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Omar Auto Spa · Precios</title>
+<meta name="description" content="Omar Auto Spa — lavado de carros y guaguas. Precios desde $30. Llama al 787-903-4885.">
+<meta name="theme-color" content="#050507">
+<meta property="og:title" content="Omar Auto Spa · Precios">
+<meta property="og:description" content="Carro desde $30 · Guagua desde $40 · Interior + vacuum +$10">
+<meta property="og:image" content="portada.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#050507; --card:#0d0e14; --line:rgba(255,255,255,.08);
+    --text:#f5f7fb; --muted:#9aa1b2;
+    --cyan:#3fe3ff; --pink:#ff2e97;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:Geist,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    min-height:100dvh; -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(60% 40% at 0% 55%, rgba(63,227,255,.10), transparent 70%),
+      radial-gradient(60% 40% at 100% 70%, rgba(255,46,151,.10), transparent 70%);
+  }
+  main{max-width:460px;margin:0 auto;padding:0 16px calc(28px + env(safe-area-inset-bottom))}
+
+  .cover{position:relative;margin:0 -16px}
+  .cover img{display:block;width:100%;height:auto;aspect-ratio:1/1}
+  .cover img{ /* funde la portada con el fondo */
+    -webkit-mask-image:linear-gradient(to bottom,#000 76%,transparent);
+            mask-image:linear-gradient(to bottom,#000 76%,transparent);
+  }
+
+  .eyebrow{
+    display:flex;align-items:center;gap:10px;justify-content:center;
+    margin:-6px 0 18px;font-size:12px;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);position:relative;z-index:1;
+  }
+  .eyebrow::before,.eyebrow::after{content:"";height:1px;width:36px;background:linear-gradient(90deg,var(--cyan),var(--pink))}
+
+  .prices{display:grid;gap:12px}
+  .card{
+    position:relative;display:flex;align-items:center;gap:16px;
+    padding:18px 18px;border-radius:20px;background:var(--card);
+    border:1px solid var(--line);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 12px 32px -12px rgba(0,0,0,.8);
+    opacity:0;transform:translateY(14px);animation:rise .6s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .card:nth-child(2){animation-delay:.08s}
+  .card:nth-child(3){animation-delay:.16s}
+  .card.cyan{border-color:rgba(63,227,255,.28)}
+  .card.pink{border-color:rgba(255,46,151,.30)}
+  .icon{
+    flex:none;width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
+    background:rgba(255,255,255,.04);border:1px solid var(--line);
+  }
+  .cyan .icon{color:var(--cyan);box-shadow:0 0 24px -6px rgba(63,227,255,.55)}
+  .pink .icon{color:var(--pink);box-shadow:0 0 24px -6px rgba(255,46,151,.55)}
+  .icon svg{width:26px;height:26px}
+  .info{flex:1;min-width:0}
+  .info h2{font-size:21px;font-weight:800;letter-spacing:-.01em}
+  .info p{font-size:13.5px;color:var(--muted);margin-top:2px}
+  .price{text-align:right;line-height:1}
+  .price small{display:block;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+  .price b{font-size:38px;font-weight:900;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+  .cyan .price b{color:var(--cyan);text-shadow:0 0 22px rgba(63,227,255,.45)}
+  .pink .price b{color:var(--pink);text-shadow:0 0 22px rgba(255,46,151,.45)}
+  .price b sup{font-size:.5em;vertical-align:.75em;margin-right:1px;font-weight:800}
+
+  .addon{
+    background:linear-gradient(var(--card),var(--card)) padding-box,
+               linear-gradient(110deg,var(--cyan),var(--pink)) border-box;
+    border:1.5px solid transparent;
+  }
+  .addon .icon{color:#fff;background:linear-gradient(135deg,rgba(63,227,255,.18),rgba(255,46,151,.18))}
+  .addon .price b{
+    background:linear-gradient(110deg,var(--cyan),var(--pink));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .tag{
+    position:absolute;top:-9px;left:18px;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;padding:3px 9px;border-radius:999px;color:#050507;
+    background:linear-gradient(110deg,var(--cyan),var(--pink));
+  }
+
+  .cta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+  .btn{
+    display:flex;align-items:center;justify-content:center;gap:9px;min-height:54px;
+    border-radius:16px;font-weight:700;font-size:15.5px;text-decoration:none;color:#050507;
+    transition:transform .15s ease, filter .15s ease;
+  }
+  .btn:active{transform:scale(.97)}
+  .btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+  .btn svg{width:20px;height:20px}
+  .call{background:var(--cyan);box-shadow:0 10px 30px -10px rgba(63,227,255,.7)}
+  .ig{background:var(--pink);color:#fff;box-shadow:0 10px 30px -10px rgba(255,46,151,.7)}
+  .phone{
+    text-align:center;margin-top:16px;font-size:13px;color:var(--muted);letter-spacing:.02em
+  }
+  .phone a{color:var(--text);text-decoration:none;font-weight:600}
+
+  @keyframes rise{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}}
+  @media (max-width:360px){.price b{font-size:32px}.info h2{font-size:19px}.icon{width:46px;height:46px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="cover">
+    <img src="portada.jpg" alt="Omar Auto Spa — 787-903-4885 — @OmarAutoSpa" width="900" height="900">
+  </div>
+
+  <div class="eyebrow">Precios</div>
+
+  <section class="prices" aria-label="Precios">
+    <article class="card cyan">
+      <div class="icon" aria-hidden="true">
+        <!-- lucide: car -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+      </div>
+      <div class="info"><h2>Carro</h2><p>Lavado exterior</p></div>
+      <div class="price"><small>desde</small><b><sup>$</sup>30</b></div>
+    </article>
+
+    <article class="card pink">
+      <div class="icon" aria-hidden="true">
+        <!-- lucide: truck -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+      </div>
+      <div class="info"><h2>Guagua</h2><p>Lavado exterior</p></div>
+      <div class="price"><small>desde</small><b><sup>$</sup>40</b></div>
+    </article>
+
+    <article class="card addon">
+      <span class="tag">Adicional</span>
+      <div class="icon" aria-hidden="true">
+        <!-- lucide: sparkles -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+      </div>
+      <div class="info"><h2>Interior</h2><p>Por dentro + vacuum</p></div>
+      <div class="price"><small>más</small><b><sup>+$</sup>10</b></div>
+    </article>
+  </section>
+
+  <nav class="cta">
+    <a class="btn call" href="tel:+17879034885">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      Llamar
+    </a>
+    <a class="btn ig" href="https://instagram.com/omarautospa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      Instagram
+    </a>
+  </nav>
+
+  <p class="phone"><a href="tel:+17879034885">787-903-4885</a> · @OmarAutoSpa</p>
+</main>
+</body>
+</html>
