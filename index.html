@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Omar Auto Spa · Precios</title>
-<meta name="description" content="Omar Auto Spa — lavado de carros y guaguas. Carro $30, Guagua $35, Guagua XL $40. Reserva tu cita. Llama al 787-667-7312 o al 787-903-4885.">
+<meta name="description" content="Omar Auto Spa — lavado de carros y guaguas. Carro $30, Guagua $35, Guagua XL $40. Reserva tu cita por texto. Llama al 787-667-7312 o al 787-903-4885.">
 <meta name="theme-color" content="#050507">
 <meta property="og:title" content="Omar Auto Spa · Precios">
 <meta property="og:description" content="Carro $30 · Guagua $35 · Guagua XL $40 · Interior + vacuum +$10">
@@ -157,6 +157,8 @@
   button.btn{border:0;font-family:inherit;cursor:pointer;width:100%}
   .send{background:var(--cyan);color:#050507}
   .send.pinkbtn{background:var(--pink);color:#fff}
+  .next{text-align:center;font-size:13.5px;color:var(--muted)}
+  .next b{color:var(--text)}
   @keyframes rise{to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}}
   @media (max-width:360px){.price b{font-size:32px}.info h2{font-size:19px}.icon{width:46px;height:46px}}
@@ -201,24 +203,6 @@
     <p class="or" id="gcal-or" hidden>o mándanos un texto con tu cita</p>
 
     <form id="f" novalidate>
-      <label class="field"><span>Servicio</span>
-        <select id="svc" required>
-          <option value="">Escoge…</option>
-          <option value="Carro|30">Carro — $30</option>
-          <option value="Guagua|35">Guagua — $35</option>
-          <option value="Guagua XL|40">Guagua XL — $40</option>
-        </select>
-      </label>
-      <label class="chip"><input type="checkbox" id="int"><span>+ Interior y vacuum ($10)</span></label>
-
-      <div class="field"><span>¿Dónde?</span>
-        <div class="seg" role="radiogroup">
-          <label><input type="radio" name="loc" value="A domicilio" checked><span>En mi casa</span></label>
-          <label><input type="radio" name="loc" value="En su local"><span>Voy a ustedes</span></label>
-        </div>
-      </div>
-      <label class="field" id="addr-wrap"><span>Dirección</span><input id="addr" type="text" autocomplete="street-address" placeholder="Calle, urbanización, pueblo"></label>
-
       <div class="row">
         <label class="field"><span>Día</span><input id="day" type="date" required></label>
         <label class="field"><span>Hora</span><select id="hour" required disabled><option value="">—</option></select></label>
@@ -227,13 +211,15 @@
 
       <label class="field"><span>Tu nombre</span><input id="name" type="text" autocomplete="name" required placeholder="Nombre"></label>
 
-      <div class="total" id="total" hidden></div>
-      <p class="err" id="err" role="alert"></p>
-
-      <div class="actions">
-        <button type="button" class="btn send" data-to="+17876677312"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Enviar a Sebastián</button>
-        <button type="button" class="btn send pinkbtn" data-to="+17879034885"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Enviar a Luis</button>
+      <div class="field"><span>¿Dónde?</span>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="loc" value="En mi casa" checked><span>En mi casa</span></label>
+          <label><input type="radio" name="loc" value="En su local"><span>Voy a ustedes</span></label>
+        </div>
       </div>
+
+      <p class="err" id="err" role="alert"></p>
+      <p class="next">Toca <b>Texto</b> abajo para enviarnos tu cita</p>
     </form>
   </section>
 
@@ -290,31 +276,26 @@ $("day").addEventListener("change", () => {
   ok.forEach(h => sel.add(new Option(fmtH(h), h))); sel.disabled = false;
 });
 
-const loc = () => document.querySelector('input[name=loc]:checked').value;
-const syncLoc = () => { $("addr-wrap").hidden = loc() !== "A domicilio"; };
-document.querySelectorAll('input[name=loc]').forEach(r => r.addEventListener("change", syncLoc)); syncLoc();
-
-const total = () => $("svc").value ? Number($("svc").value.split("|")[1]) + ($("int").checked ? 10 : 0) : null;
-const showTotal = () => { const t = total(), el = $("total"); el.hidden = t === null; if (t !== null) el.innerHTML = `<span>Total</span><b>$${t}</b>`; };
-$("svc").addEventListener("change", showTotal); $("int").addEventListener("change", showTotal);
-
+// Los botones "Texto" de contacto mandan la cita si la llenaron; si no, abren un texto en blanco.
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-document.querySelectorAll(".send").forEach(b => b.addEventListener("click", () => {
+document.querySelectorAll(".person a.text").forEach(a => a.addEventListener("click", ev => {
+  const started = $("day").value || $("hour").value || $("name").value.trim();
+  if (!started) return;  // texto normal
+  ev.preventDefault();
   const e = $("err"); e.textContent = "";
-  if (!$("svc").value) return e.textContent = "Escoge el servicio.";
-  if (loc() === "A domicilio" && !$("addr").value.trim()) return e.textContent = "Escribe la dirección.";
-  if (!$("day").value || !$("hour").value) return e.textContent = "Escoge el día y la hora.";
-  if (!$("name").value.trim()) return e.textContent = "Escribe tu nombre.";
-  const [svc, price] = $("svc").value.split("|"), d = parseDay($("day").value);
-  const dia = d.toLocaleDateString("es-PR", {weekday: "long", day: "numeric", month: "long"});
+  const fail = msg => { e.textContent = msg; $("reservar").scrollIntoView({behavior: "smooth"}); };
+  if (!$("day").value || !$("hour").value) return fail("Escoge el día y la hora.");
+  if (!$("name").value.trim()) return fail("Escribe tu nombre.");
+  const loc = document.querySelector('input[name=loc]:checked').value;
+  const dia = parseDay($("day").value).toLocaleDateString("es-PR", {weekday: "long", day: "numeric", month: "long"});
   const msg = [
-    "Hola, quiero reservar en Omar Auto Spa:",
-    `• Servicio: ${svc} ($${price})${$("int").checked ? " + Interior y vacuum ($10)" : ""} = $${total()}`,
+    "Hola, quiero una cita en Omar Auto Spa:",
     `• Día: ${dia}, ${fmtH(Number($("hour").value))}`,
-    `• Lugar: ${loc()}${loc() === "A domicilio" ? " — " + $("addr").value.trim() : ""}`,
+    `• Lugar: ${loc}`,
     `• Nombre: ${$("name").value.trim()}`
   ].join("\n");
-  const url = `sms:${b.dataset.to}${isIOS ? "&" : "?"}body=${encodeURIComponent(msg)}`;
+  const to = a.getAttribute("href").replace(/^sms:/, "").split(/[?&]/)[0];
+  const url = `sms:${to}${isIOS ? "&" : "?"}body=${encodeURIComponent(msg)}`;
   document.body.dataset.lastSms = url;
   location.href = url;
 }));
