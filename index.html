@@ -179,19 +179,19 @@
       <div class="price"><b><sup>$</sup>30</b></div>
     </article>
     <article class="card pink">
-      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>
+      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg></div>
       <div class="info"><h2>Guagua</h2><p>Lavado exterior</p></div>
       <div class="price"><b><sup>$</sup>35</b></div>
     </article>
     <article class="card violet">
-      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg></div>
+      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>
       <div class="info"><h2>Guagua XL</h2><p>Lavado exterior</p></div>
       <div class="price"><b><sup>$</sup>40</b></div>
     </article>
     <article class="card addon">
       <span class="tag">Adicional</span>
       <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div>
-      <div class="info"><h2>Interior</h2><p>Por dentro + vacuum</p></div>
+      <div class="info"><h2>Interior</h2><p>Por dentro paño y vacuum</p></div>
       <div class="price"><small>más</small><b><sup>+$</sup>10</b></div>
     </article>
   </section>
@@ -210,13 +210,6 @@
       <p class="hint">Lun y Mié 1–6 pm · Mar, Sáb y Dom desde 8 am</p>
 
       <label class="field"><span>Tu nombre</span><input id="name" type="text" autocomplete="name" required placeholder="Nombre"></label>
-
-      <div class="field"><span>¿Dónde?</span>
-        <div class="seg" role="radiogroup">
-          <label><input type="radio" name="loc" value="En mi casa" checked><span>En mi casa</span></label>
-          <label><input type="radio" name="loc" value="En su local"><span>Voy a ustedes</span></label>
-        </div>
-      </div>
 
       <p class="err" id="err" role="alert"></p>
       <p class="next">Toca <b>Texto</b> abajo para enviarnos tu cita</p>
@@ -286,12 +279,10 @@ document.querySelectorAll(".person a.text").forEach(a => a.addEventListener("cli
   const fail = msg => { e.textContent = msg; $("reservar").scrollIntoView({behavior: "smooth"}); };
   if (!$("day").value || !$("hour").value) return fail("Escoge el día y la hora.");
   if (!$("name").value.trim()) return fail("Escribe tu nombre.");
-  const loc = document.querySelector('input[name=loc]:checked').value;
   const dia = parseDay($("day").value).toLocaleDateString("es-PR", {weekday: "long", day: "numeric", month: "long"});
   const msg = [
     "Hola, quiero una cita en Omar Auto Spa:",
     `• Día: ${dia}, ${fmtH(Number($("hour").value))}`,
-    `• Lugar: ${loc}`,
     `• Nombre: ${$("name").value.trim()}`
   ].join("\n");
   const to = a.getAttribute("href").replace(/^sms:/, "").split(/[?&]/)[0];
