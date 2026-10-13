@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Omar Auto Spa · Precios</title>
-<meta name="description" content="Omar Auto Spa — lavado de carros y guaguas. Precios desde $30. Llama al 787-667-7312 o al 787-903-4885.">
+<meta name="description" content="Omar Auto Spa — lavado de carros y guaguas. Carro $30, Guagua $35, Guagua XL $40. Reserva tu cita. Llama al 787-667-7312 o al 787-903-4885.">
 <meta name="theme-color" content="#050507">
 <meta property="og:title" content="Omar Auto Spa · Precios">
-<meta property="og:description" content="Carro desde $30 · Guagua desde $40 · Interior + vacuum +$10">
+<meta property="og:description" content="Carro $30 · Guagua $35 · Guagua XL $40 · Interior + vacuum +$10">
 <meta property="og:image" content="portada.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -115,6 +115,48 @@
     color:var(--text);text-decoration:none;font-weight:600;font-size:15px;min-height:44px}
   .iglink svg{width:19px;height:19px;color:var(--pink)}
 
+  .card.violet{border-color:rgba(177,140,255,.32)}
+  .violet .icon{color:#b18cff;box-shadow:0 0 24px -6px rgba(177,140,255,.55)}
+  .violet .price b{color:#b18cff;text-shadow:0 0 22px rgba(177,140,255,.45)}
+  .card:nth-child(4){animation-delay:.24s}
+  .book{display:grid;gap:12px}
+  .gcal{background:linear-gradient(110deg,var(--cyan),var(--pink));color:#050507;min-height:56px;font-size:16.5px;
+    box-shadow:0 10px 30px -10px rgba(255,46,151,.6)}
+  .or{text-align:center;font-size:13px;color:var(--muted)}
+  .gcal[hidden],.or[hidden]{display:none}
+  form .actions{grid-template-columns:1fr}
+  form{display:grid;gap:12px;padding:16px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+  .field{display:grid;gap:6px;min-width:0}
+  .field[hidden]{display:none}
+  .field>span{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  input[type=text],input[type=date],select{width:100%;min-height:50px;padding:0 14px;border-radius:14px;
+    background-color:#08090d;color:var(--text);border:1px solid var(--line);font:500 16px Geist,system-ui,sans-serif;
+    color-scheme:dark;-webkit-appearance:none;appearance:none}
+  select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+    background-position:calc(100% - 20px) 22px,calc(100% - 15px) 22px;background-size:5px 5px;background-repeat:no-repeat;padding-right:36px}
+  select:disabled{opacity:.5}
+  input:focus,select:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 3px rgba(63,227,255,.18)}
+  .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+  input[type=date]{min-width:0;max-width:100%;padding:0 10px;display:block}
+  input[type=date]::-webkit-date-and-time-value{text-align:left}
+  .chip{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;border-radius:14px;border:1px solid var(--line);
+    background:#08090d;font-weight:600;font-size:15px;cursor:pointer}
+  .chip input{width:20px;height:20px;accent-color:var(--pink)}
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:4px;border-radius:14px;background:#08090d;border:1px solid var(--line)}
+  .seg label{position:relative}
+  .seg input{position:absolute;opacity:0;pointer-events:none}
+  .seg span{display:flex;align-items:center;justify-content:center;min-height:42px;border-radius:10px;font-weight:600;font-size:14.5px;color:var(--muted);cursor:pointer}
+  .seg input:checked+span{background:rgba(63,227,255,.14);color:var(--text);box-shadow:inset 0 0 0 1px rgba(63,227,255,.45)}
+  .seg input:focus-visible+span{outline:2px solid #fff}
+  .hint{font-size:12.5px;color:var(--muted);margin-top:-4px}
+  .total{display:flex;justify-content:space-between;align-items:baseline;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.04);font-weight:600}
+  .total[hidden]{display:none}
+  .total b{font-size:24px;font-weight:900;background:linear-gradient(110deg,var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .err{color:#ff7aa8;font-size:13.5px;font-weight:600}
+  .err:empty{display:none}
+  button.btn{border:0;font-family:inherit;cursor:pointer;width:100%}
+  .send{background:var(--cyan);color:#050507}
+  .send.pinkbtn{background:var(--pink);color:#fff}
   @keyframes rise{to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){.card{animation:none;opacity:1;transform:none}}
   @media (max-width:360px){.price b{font-size:32px}.info h2{font-size:19px}.icon{width:46px;height:46px}}
@@ -130,32 +172,69 @@
 
   <section class="prices" aria-label="Precios">
     <article class="card cyan">
-      <div class="icon" aria-hidden="true">
-        <!-- lucide: car -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
-      </div>
+      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
       <div class="info"><h2>Carro</h2><p>Lavado exterior</p></div>
-      <div class="price"><small>desde</small><b><sup>$</sup>30</b></div>
+      <div class="price"><b><sup>$</sup>30</b></div>
     </article>
-
     <article class="card pink">
-      <div class="icon" aria-hidden="true">
-        <!-- lucide: truck -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
-      </div>
+      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></div>
       <div class="info"><h2>Guagua</h2><p>Lavado exterior</p></div>
-      <div class="price"><small>desde</small><b><sup>$</sup>40</b></div>
+      <div class="price"><b><sup>$</sup>35</b></div>
     </article>
-
+    <article class="card violet">
+      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3"/><circle cx="7" cy="18" r="2"/><path d="M9 18h5"/><circle cx="16" cy="18" r="2"/></svg></div>
+      <div class="info"><h2>Guagua XL</h2><p>Lavado exterior</p></div>
+      <div class="price"><b><sup>$</sup>40</b></div>
+    </article>
     <article class="card addon">
       <span class="tag">Adicional</span>
-      <div class="icon" aria-hidden="true">
-        <!-- lucide: sparkles -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-      </div>
+      <div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></div>
       <div class="info"><h2>Interior</h2><p>Por dentro + vacuum</p></div>
       <div class="price"><small>más</small><b><sup>+$</sup>10</b></div>
     </article>
+  </section>
+
+  <div class="eyebrow contact-eyebrow" id="reservar">Reservar</div>
+
+  <section class="book" aria-label="Reservar">
+    <a id="gcal" class="btn gcal" href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>Reservar en el calendario</a>
+    <p class="or" id="gcal-or" hidden>o mándanos un texto con tu cita</p>
+
+    <form id="f" novalidate>
+      <label class="field"><span>Servicio</span>
+        <select id="svc" required>
+          <option value="">Escoge…</option>
+          <option value="Carro|30">Carro — $30</option>
+          <option value="Guagua|35">Guagua — $35</option>
+          <option value="Guagua XL|40">Guagua XL — $40</option>
+        </select>
+      </label>
+      <label class="chip"><input type="checkbox" id="int"><span>+ Interior y vacuum ($10)</span></label>
+
+      <div class="field"><span>¿Dónde?</span>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="loc" value="A domicilio" checked><span>En mi casa</span></label>
+          <label><input type="radio" name="loc" value="En su local"><span>Voy a ustedes</span></label>
+        </div>
+      </div>
+      <label class="field" id="addr-wrap"><span>Dirección</span><input id="addr" type="text" autocomplete="street-address" placeholder="Calle, urbanización, pueblo"></label>
+
+      <div class="row">
+        <label class="field"><span>Día</span><input id="day" type="date" required></label>
+        <label class="field"><span>Hora</span><select id="hour" required disabled><option value="">—</option></select></label>
+      </div>
+      <p class="hint">Lun y Mié 1–6 pm · Mar, Sáb y Dom desde 8 am</p>
+
+      <label class="field"><span>Tu nombre</span><input id="name" type="text" autocomplete="name" required placeholder="Nombre"></label>
+
+      <div class="total" id="total" hidden></div>
+      <p class="err" id="err" role="alert"></p>
+
+      <div class="actions">
+        <button type="button" class="btn send" data-to="+17876677312"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Enviar a Sebastián</button>
+        <button type="button" class="btn send pinkbtn" data-to="+17879034885"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Enviar a Luis</button>
+      </div>
+    </form>
   </section>
 
   <div class="eyebrow contact-eyebrow">Contacto</div>
@@ -185,5 +264,60 @@
 
   <a class="iglink" href="https://instagram.com/omarautospa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@OmarAutoSpa</a>
 </main>
+<script>
+// Link de la agenda de citas de Google Calendar (cuando exista, aparece el botón)
+const GCAL_URL = "";
+if (GCAL_URL) { const a = document.getElementById("gcal"); a.href = GCAL_URL; a.hidden = false; document.getElementById("gcal-or").hidden = false; }
+
+const $ = id => document.getElementById(id);
+// getDay(): 0=Dom 1=Lun 2=Mar 3=Mié 6=Sáb. Jueves y viernes no se trabaja.
+const ALL_DAY = [8,9,10,11,12,13,14,15,16,17];
+const HOURS = {1:[13,14,15,16,17], 3:[13,14,15,16,17], 2:ALL_DAY, 6:ALL_DAY, 0:ALL_DAY};
+const fmtH = h => `${h % 12 || 12}:00 ${h < 12 ? "AM" : "PM"}`;
+const pad = n => String(n).padStart(2, "0");
+const today = new Date();
+$("day").min = `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`;
+const parseDay = v => { const [y, m, d] = v.split("-").map(Number); return new Date(y, m - 1, d); };
+
+$("day").addEventListener("change", () => {
+  const sel = $("hour"); sel.innerHTML = '<option value="">—</option>'; sel.disabled = true; $("err").textContent = "";
+  if (!$("day").value) return;
+  const d = parseDay($("day").value), list = HOURS[d.getDay()];
+  if (!list) { $("err").textContent = "Jueves y viernes no trabajamos. Escoge otro día."; return; }
+  const isToday = d.toDateString() === new Date().toDateString(), now = new Date().getHours();
+  const ok = list.filter(h => !isToday || h > now);
+  if (!ok.length) { $("err").textContent = "Ya no quedan horas ese día. Escoge otro."; return; }
+  ok.forEach(h => sel.add(new Option(fmtH(h), h))); sel.disabled = false;
+});
+
+const loc = () => document.querySelector('input[name=loc]:checked').value;
+const syncLoc = () => { $("addr-wrap").hidden = loc() !== "A domicilio"; };
+document.querySelectorAll('input[name=loc]').forEach(r => r.addEventListener("change", syncLoc)); syncLoc();
+
+const total = () => $("svc").value ? Number($("svc").value.split("|")[1]) + ($("int").checked ? 10 : 0) : null;
+const showTotal = () => { const t = total(), el = $("total"); el.hidden = t === null; if (t !== null) el.innerHTML = `<span>Total</span><b>$${t}</b>`; };
+$("svc").addEventListener("change", showTotal); $("int").addEventListener("change", showTotal);
+
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+document.querySelectorAll(".send").forEach(b => b.addEventListener("click", () => {
+  const e = $("err"); e.textContent = "";
+  if (!$("svc").value) return e.textContent = "Escoge el servicio.";
+  if (loc() === "A domicilio" && !$("addr").value.trim()) return e.textContent = "Escribe la dirección.";
+  if (!$("day").value || !$("hour").value) return e.textContent = "Escoge el día y la hora.";
+  if (!$("name").value.trim()) return e.textContent = "Escribe tu nombre.";
+  const [svc, price] = $("svc").value.split("|"), d = parseDay($("day").value);
+  const dia = d.toLocaleDateString("es-PR", {weekday: "long", day: "numeric", month: "long"});
+  const msg = [
+    "Hola, quiero reservar en Omar Auto Spa:",
+    `• Servicio: ${svc} ($${price})${$("int").checked ? " + Interior y vacuum ($10)" : ""} = $${total()}`,
+    `• Día: ${dia}, ${fmtH(Number($("hour").value))}`,
+    `• Lugar: ${loc()}${loc() === "A domicilio" ? " — " + $("addr").value.trim() : ""}`,
+    `• Nombre: ${$("name").value.trim()}`
+  ].join("\n");
+  const url = `sms:${b.dataset.to}${isIOS ? "&" : "?"}body=${encodeURIComponent(msg)}`;
+  document.body.dataset.lastSms = url;
+  location.href = url;
+}));
+</script>
 </body>
 </html>
